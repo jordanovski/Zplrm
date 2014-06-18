@@ -1,0 +1,43 @@
+﻿@model ZplrmApp.Models.Gradovi
+
+@{
+    ViewBag.Title = "Градови";
+}
+<style type="text/css">
+    .form-horizontal .controls {
+        margin-left: 180px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .form-horizontal .control-group {
+        margin-bottom: 5px;
+    }
+    legend + .control-group {
+        margin-top: 5px;
+        -webkit-margin-top-collapse: separate;
+    }
+</style>
+<h3>Дали сте сигурни дека сакате да го избришете следново?</h3>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Град</legend>
+
+        <div class="control-group">
+                <label class="control-label" for="TemaOpis">Име</label>
+                <div class="controls">
+                    @Html.DisplayFor(model => model.GradIme)
+                </div>
+            </div>
+    </fieldset>
+</form>
+@using (Html.BeginForm()) {
+    <p>
+        <button type="submit" class="btn">Избриши</button>
+    </p>
+    <p>
+        @Html.ActionLink("Назад на листата", "Index")
+    </p>
+}

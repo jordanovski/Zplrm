@@ -1,0 +1,100 @@
+﻿@model ZplrmApp.Models.Rabotilnici
+
+@{
+    ViewBag.Title = "Работилници";
+}
+<style type="text/css">
+    .form-horizontal .controls {
+        margin-left: 180px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .form-horizontal .control-group {
+        margin-bottom: 5px;
+    }
+    legend + .control-group {
+        margin-top: 5px;
+        -webkit-margin-top-collapse: separate;
+    }
+</style>
+
+<h3>Дали сте сигурни дека сакате да ја избришете оваа работилница?</h3>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Работилница</legend>
+    
+        <div class="control-group">
+            <label class="control-label" for="TemaId">Тема</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Temi.TemaIme)
+            </div>
+        </div>
+  
+        <div class="control-group">
+            <label class="control-label" for="GradId">Град</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Gradovi.GradIme)
+            </div>
+        </div>
+  
+        <div class="control-group">
+            <label class="control-label" for="Mesto">Место</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Mesto)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Lokacija">Локација</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Lokacija)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Datum">Датум</label>
+            <div class="controls">
+                 @Html.DisplayFor(model => model.Datum)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Pocetok">Почеток</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Pocetok)
+            </div>
+        </div>
+    
+        <div class="control-group">
+            <label class="control-label" for="Kraj">Крај</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Kraj)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Bodovi">Бодови</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Bodovi)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="OptimumPosetiteli">Оптимум посетители</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.OptimumPosetiteli)
+            </div>
+        </div>
+</fieldset>
+</form>
+@using (Html.BeginForm()) {
+    <p>
+        <button type="submit" class="btn">Избриши</button>
+    </p>
+    <p>
+        @Html.ActionLink("Назад на листата", "Index")
+    </p>
+}

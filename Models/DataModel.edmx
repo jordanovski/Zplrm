@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ZplrmDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ZplrmDbModelStoreContainer">
+          <EntitySet Name="Doktori" EntityType="ZplrmDbModel.Store.Doktori" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Gradovi" EntityType="ZplrmDbModel.Store.Gradovi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Prezenteri" EntityType="ZplrmDbModel.Store.Prezenteri" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Rabotilnici" EntityType="ZplrmDbModel.Store.Rabotilnici" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RabotilniciDoktori" EntityType="ZplrmDbModel.Store.RabotilniciDoktori" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RabotilniciPrezenteri" EntityType="ZplrmDbModel.Store.RabotilniciPrezenteri" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Temi" EntityType="ZplrmDbModel.Store.Temi" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Doktori_Gradovi" Association="ZplrmDbModel.Store.FK_Doktori_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Doktori" EntitySet="Doktori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prezenteri_Gradovi" Association="ZplrmDbModel.Store.FK_Prezenteri_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Prezenteri" EntitySet="Prezenteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rabotilnici_Gradovi" Association="ZplrmDbModel.Store.FK_Rabotilnici_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rabotilnici_Temi" Association="ZplrmDbModel.Store.FK_Rabotilnici_Temi">
+            <End Role="Temi" EntitySet="Temi" />
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciDoktori_Doktori" Association="ZplrmDbModel.Store.FK_RabotilniciDoktori_Doktori">
+            <End Role="Doktori" EntitySet="Doktori" />
+            <End Role="RabotilniciDoktori" EntitySet="RabotilniciDoktori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciDoktori_Rabotilnici" Association="ZplrmDbModel.Store.FK_RabotilniciDoktori_Rabotilnici">
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+            <End Role="RabotilniciDoktori" EntitySet="RabotilniciDoktori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciPrezenteri_Prezenteri" Association="ZplrmDbModel.Store.FK_RabotilniciPrezenteri_Prezenteri">
+            <End Role="Prezenteri" EntitySet="Prezenteri" />
+            <End Role="RabotilniciPrezenteri" EntitySet="RabotilniciPrezenteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciPrezenteri_Rabotilnici1" Association="ZplrmDbModel.Store.FK_RabotilniciPrezenteri_Rabotilnici1">
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+            <End Role="RabotilniciPrezenteri" EntitySet="RabotilniciPrezenteri" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Doktori">
+          <Key>
+            <PropertyRef Name="DoktorFaksimil" />
+          </Key>
+          <Property Name="DoktorFaksimil" Type="char" Nullable="false" MaxLength="6" />
+          <Property Name="DoktorImePrezime" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GradId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="FixedPhone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Gradovi">
+          <Key>
+            <PropertyRef Name="GradId" />
+          </Key>
+          <Property Name="GradId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GradIme" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Prezenteri">
+          <Key>
+            <PropertyRef Name="PrezenterFaksimil" />
+          </Key>
+          <Property Name="PrezenterFaksimil" Type="char" Nullable="false" MaxLength="6" />
+          <Property Name="PrezenterImePrezime" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GradId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="FixedPhone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rabotilnici">
+          <Key>
+            <PropertyRef Name="RabotilnicaId" />
+          </Key>
+          <Property Name="RabotilnicaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TemaId" Type="int" Nullable="false" />
+          <Property Name="GradId" Type="int" Nullable="false" />
+          <Property Name="Mesto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lokacija" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Datum" Type="date" Nullable="false" />
+          <Property Name="Pocetok" Type="time" Nullable="false" Precision="0" />
+          <Property Name="Kraj" Type="time" Nullable="false" Precision="0" />
+          <Property Name="Bodovi" Type="int" />
+          <Property Name="OptimumPosetiteli" Type="int" />
+        </EntityType>
+        <EntityType Name="RabotilniciDoktori">
+          <Key>
+            <PropertyRef Name="RabotilnicaDoktorId" />
+          </Key>
+          <Property Name="RabotilnicaDoktorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RabotilnicaId" Type="int" Nullable="false" />
+          <Property Name="DoktorFaksimil" Type="char" Nullable="false" MaxLength="6" />
+          <Property Name="UplataIznos" Type="float" Nullable="false" />
+          <Property Name="UplataDatum" Type="date" />
+          <Property Name="VremePrijava" Type="datetime" Nullable="false" />
+          <Property Name="Prisuten" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RabotilniciPrezenteri">
+          <Key>
+            <PropertyRef Name="RabotilnicaPrezenterId" />
+          </Key>
+          <Property Name="RabotilnicaPrezenterId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RabotilnicaId" Type="int" Nullable="false" />
+          <Property Name="PrezenterFaksimil" Type="char" Nullable="false" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Temi">
+          <Key>
+            <PropertyRef Name="TemaId" />
+          </Key>
+          <Property Name="TemaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TemaIme" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TemaOpis" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Doktori_Gradovi">
+          <End Role="Gradovi" Type="ZplrmDbModel.Store.Gradovi" Multiplicity="0..1" />
+          <End Role="Doktori" Type="ZplrmDbModel.Store.Doktori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradId" />
+            </Principal>
+            <Dependent Role="Doktori">
+              <PropertyRef Name="GradId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prezenteri_Gradovi">
+          <End Role="Gradovi" Type="ZplrmDbModel.Store.Gradovi" Multiplicity="0..1" />
+          <End Role="Prezenteri" Type="ZplrmDbModel.Store.Prezenteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradId" />
+            </Principal>
+            <Dependent Role="Prezenteri">
+              <PropertyRef Name="GradId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rabotilnici_Gradovi">
+          <End Role="Gradovi" Type="ZplrmDbModel.Store.Gradovi" Multiplicity="1" />
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Store.Rabotilnici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradId" />
+            </Principal>
+            <Dependent Role="Rabotilnici">
+              <PropertyRef Name="GradId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rabotilnici_Temi">
+          <End Role="Temi" Type="ZplrmDbModel.Store.Temi" Multiplicity="1" />
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Store.Rabotilnici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Temi">
+              <PropertyRef Name="TemaId" />
+            </Principal>
+            <Dependent Role="Rabotilnici">
+              <PropertyRef Name="TemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciDoktori_Doktori">
+          <End Role="Doktori" Type="ZplrmDbModel.Store.Doktori" Multiplicity="1" />
+          <End Role="RabotilniciDoktori" Type="ZplrmDbModel.Store.RabotilniciDoktori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktori">
+              <PropertyRef Name="DoktorFaksimil" />
+            </Principal>
+            <Dependent Role="RabotilniciDoktori">
+              <PropertyRef Name="DoktorFaksimil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciDoktori_Rabotilnici">
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Store.Rabotilnici" Multiplicity="1" />
+          <End Role="RabotilniciDoktori" Type="ZplrmDbModel.Store.RabotilniciDoktori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rabotilnici">
+              <PropertyRef Name="RabotilnicaId" />
+            </Principal>
+            <Dependent Role="RabotilniciDoktori">
+              <PropertyRef Name="RabotilnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciPrezenteri_Prezenteri">
+          <End Role="Prezenteri" Type="ZplrmDbModel.Store.Prezenteri" Multiplicity="1" />
+          <End Role="RabotilniciPrezenteri" Type="ZplrmDbModel.Store.RabotilniciPrezenteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prezenteri">
+              <PropertyRef Name="PrezenterFaksimil" />
+            </Principal>
+            <Dependent Role="RabotilniciPrezenteri">
+              <PropertyRef Name="PrezenterFaksimil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciPrezenteri_Rabotilnici1">
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Store.Rabotilnici" Multiplicity="1" />
+          <End Role="RabotilniciPrezenteri" Type="ZplrmDbModel.Store.RabotilniciPrezenteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rabotilnici">
+              <PropertyRef Name="RabotilnicaId" />
+            </Principal>
+            <Dependent Role="RabotilniciPrezenteri">
+              <PropertyRef Name="RabotilnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZplrmDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ZplrmDbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Doktori" EntityType="ZplrmDbModel.Doktori" />
+          <EntitySet Name="Gradovi" EntityType="ZplrmDbModel.Gradovi" />
+          <EntitySet Name="Prezenteri" EntityType="ZplrmDbModel.Prezenteri" />
+          <EntitySet Name="Rabotilnici" EntityType="ZplrmDbModel.Rabotilnici" />
+          <EntitySet Name="RabotilniciDoktori" EntityType="ZplrmDbModel.RabotilniciDoktori" />
+          <EntitySet Name="RabotilniciPrezenteri" EntityType="ZplrmDbModel.RabotilniciPrezenteri" />
+          <EntitySet Name="Temi" EntityType="ZplrmDbModel.Temi" />
+          <AssociationSet Name="FK_Doktori_Gradovi" Association="ZplrmDbModel.FK_Doktori_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Doktori" EntitySet="Doktori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciDoktori_Doktori" Association="ZplrmDbModel.FK_RabotilniciDoktori_Doktori">
+            <End Role="Doktori" EntitySet="Doktori" />
+            <End Role="RabotilniciDoktori" EntitySet="RabotilniciDoktori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prezenteri_Gradovi" Association="ZplrmDbModel.FK_Prezenteri_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Prezenteri" EntitySet="Prezenteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rabotilnici_Gradovi" Association="ZplrmDbModel.FK_Rabotilnici_Gradovi">
+            <End Role="Gradovi" EntitySet="Gradovi" />
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciPrezenteri_Prezenteri" Association="ZplrmDbModel.FK_RabotilniciPrezenteri_Prezenteri">
+            <End Role="Prezenteri" EntitySet="Prezenteri" />
+            <End Role="RabotilniciPrezenteri" EntitySet="RabotilniciPrezenteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rabotilnici_Temi" Association="ZplrmDbModel.FK_Rabotilnici_Temi">
+            <End Role="Temi" EntitySet="Temi" />
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciDoktori_Rabotilnici" Association="ZplrmDbModel.FK_RabotilniciDoktori_Rabotilnici">
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+            <End Role="RabotilniciDoktori" EntitySet="RabotilniciDoktori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RabotilniciPrezenteri_Rabotilnici1" Association="ZplrmDbModel.FK_RabotilniciPrezenteri_Rabotilnici1">
+            <End Role="Rabotilnici" EntitySet="Rabotilnici" />
+            <End Role="RabotilniciPrezenteri" EntitySet="RabotilniciPrezenteri" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Doktori">
+          <Key>
+            <PropertyRef Name="DoktorFaksimil" />
+          </Key>
+          <Property Name="DoktorFaksimil" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
+          <Property Name="DoktorImePrezime" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GradId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FixedPhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Gradovi" Relationship="ZplrmDbModel.FK_Doktori_Gradovi" FromRole="Doktori" ToRole="Gradovi" />
+          <NavigationProperty Name="RabotilniciDoktori" Relationship="ZplrmDbModel.FK_RabotilniciDoktori_Doktori" FromRole="Doktori" ToRole="RabotilniciDoktori" />
+        </EntityType>
+        <EntityType Name="Gradovi">
+          <Key>
+            <PropertyRef Name="GradId" />
+          </Key>
+          <Property Name="GradId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GradIme" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Doktori" Relationship="ZplrmDbModel.FK_Doktori_Gradovi" FromRole="Gradovi" ToRole="Doktori" />
+          <NavigationProperty Name="Prezenteri" Relationship="ZplrmDbModel.FK_Prezenteri_Gradovi" FromRole="Gradovi" ToRole="Prezenteri" />
+          <NavigationProperty Name="Rabotilnici" Relationship="ZplrmDbModel.FK_Rabotilnici_Gradovi" FromRole="Gradovi" ToRole="Rabotilnici" />
+        </EntityType>
+        <EntityType Name="Prezenteri">
+          <Key>
+            <PropertyRef Name="PrezenterFaksimil" />
+          </Key>
+          <Property Name="PrezenterFaksimil" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
+          <Property Name="PrezenterImePrezime" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GradId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FixedPhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Gradovi" Relationship="ZplrmDbModel.FK_Prezenteri_Gradovi" FromRole="Prezenteri" ToRole="Gradovi" />
+          <NavigationProperty Name="RabotilniciPrezenteri" Relationship="ZplrmDbModel.FK_RabotilniciPrezenteri_Prezenteri" FromRole="Prezenteri" ToRole="RabotilniciPrezenteri" />
+        </EntityType>
+        <EntityType Name="Rabotilnici">
+          <Key>
+            <PropertyRef Name="RabotilnicaId" />
+          </Key>
+          <Property Name="RabotilnicaId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TemaId" Type="Int32" Nullable="false" />
+          <Property Name="GradId" Type="Int32" Nullable="false" />
+          <Property Name="Mesto" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Lokacija" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Pocetok" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Kraj" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="Bodovi" Type="Int32" />
+          <Property Name="OptimumPosetiteli" Type="Int32" />
+          <NavigationProperty Name="Gradovi" Relationship="ZplrmDbModel.FK_Rabotilnici_Gradovi" FromRole="Rabotilnici" ToRole="Gradovi" />
+          <NavigationProperty Name="Temi" Relationship="ZplrmDbModel.FK_Rabotilnici_Temi" FromRole="Rabotilnici" ToRole="Temi" />
+          <NavigationProperty Name="RabotilniciDoktori" Relationship="ZplrmDbModel.FK_RabotilniciDoktori_Rabotilnici" FromRole="Rabotilnici" ToRole="RabotilniciDoktori" />
+          <NavigationProperty Name="RabotilniciPrezenteri" Relationship="ZplrmDbModel.FK_RabotilniciPrezenteri_Rabotilnici1" FromRole="Rabotilnici" ToRole="RabotilniciPrezenteri" />
+        </EntityType>
+        <EntityType Name="RabotilniciDoktori">
+          <Key>
+            <PropertyRef Name="RabotilnicaDoktorId" />
+          </Key>
+          <Property Name="RabotilnicaDoktorId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RabotilnicaId" Type="Int32" Nullable="false" />
+          <Property Name="DoktorFaksimil" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
+          <Property Name="UplataIznos" Type="Double" Nullable="false" />
+          <Property Name="UplataDatum" Type="DateTime" Precision="0" />
+          <Property Name="VremePrijava" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Prisuten" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Doktori" Relationship="ZplrmDbModel.FK_RabotilniciDoktori_Doktori" FromRole="RabotilniciDoktori" ToRole="Doktori" />
+          <NavigationProperty Name="Rabotilnici" Relationship="ZplrmDbModel.FK_RabotilniciDoktori_Rabotilnici" FromRole="RabotilniciDoktori" ToRole="Rabotilnici" />
+        </EntityType>
+        <EntityType Name="RabotilniciPrezenteri">
+          <Key>
+            <PropertyRef Name="RabotilnicaPrezenterId" />
+          </Key>
+          <Property Name="RabotilnicaPrezenterId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RabotilnicaId" Type="Int32" Nullable="false" />
+          <Property Name="PrezenterFaksimil" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Prezenteri" Relationship="ZplrmDbModel.FK_RabotilniciPrezenteri_Prezenteri" FromRole="RabotilniciPrezenteri" ToRole="Prezenteri" />
+          <NavigationProperty Name="Rabotilnici" Relationship="ZplrmDbModel.FK_RabotilniciPrezenteri_Rabotilnici1" FromRole="RabotilniciPrezenteri" ToRole="Rabotilnici" />
+        </EntityType>
+        <EntityType Name="Temi">
+          <Key>
+            <PropertyRef Name="TemaId" />
+          </Key>
+          <Property Name="TemaId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TemaIme" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TemaOpis" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Rabotilnici" Relationship="ZplrmDbModel.FK_Rabotilnici_Temi" FromRole="Temi" ToRole="Rabotilnici" />
+        </EntityType>
+        <Association Name="FK_Doktori_Gradovi">
+          <End Role="Gradovi" Type="ZplrmDbModel.Gradovi" Multiplicity="0..1" />
+          <End Role="Doktori" Type="ZplrmDbModel.Doktori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradId" />
+            </Principal>
+            <Dependent Role="Doktori">
+              <PropertyRef Name="GradId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciDoktori_Doktori">
+          <End Role="Doktori" Type="ZplrmDbModel.Doktori" Multiplicity="1" />
+          <End Role="RabotilniciDoktori" Type="ZplrmDbModel.RabotilniciDoktori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktori">
+              <PropertyRef Name="DoktorFaksimil" />
+            </Principal>
+            <Dependent Role="RabotilniciDoktori">
+              <PropertyRef Name="DoktorFaksimil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prezenteri_Gradovi">
+          <End Role="Gradovi" Type="ZplrmDbModel.Gradovi" Multiplicity="0..1" />
+          <End Role="Prezenteri" Type="ZplrmDbModel.Prezenteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradId" />
+            </Principal>
+            <Dependent Role="Prezenteri">
+              <PropertyRef Name="GradId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rabotilnici_Gradovi">
+          <End Role="Gradovi" Type="ZplrmDbModel.Gradovi" Multiplicity="1" />
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Rabotilnici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gradovi">
+              <PropertyRef Name="GradId" />
+            </Principal>
+            <Dependent Role="Rabotilnici">
+              <PropertyRef Name="GradId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciPrezenteri_Prezenteri">
+          <End Role="Prezenteri" Type="ZplrmDbModel.Prezenteri" Multiplicity="1" />
+          <End Role="RabotilniciPrezenteri" Type="ZplrmDbModel.RabotilniciPrezenteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prezenteri">
+              <PropertyRef Name="PrezenterFaksimil" />
+            </Principal>
+            <Dependent Role="RabotilniciPrezenteri">
+              <PropertyRef Name="PrezenterFaksimil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rabotilnici_Temi">
+          <End Role="Temi" Type="ZplrmDbModel.Temi" Multiplicity="1" />
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Rabotilnici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Temi">
+              <PropertyRef Name="TemaId" />
+            </Principal>
+            <Dependent Role="Rabotilnici">
+              <PropertyRef Name="TemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciDoktori_Rabotilnici">
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Rabotilnici" Multiplicity="1" />
+          <End Role="RabotilniciDoktori" Type="ZplrmDbModel.RabotilniciDoktori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rabotilnici">
+              <PropertyRef Name="RabotilnicaId" />
+            </Principal>
+            <Dependent Role="RabotilniciDoktori">
+              <PropertyRef Name="RabotilnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RabotilniciPrezenteri_Rabotilnici1">
+          <End Role="Rabotilnici" Type="ZplrmDbModel.Rabotilnici" Multiplicity="1" />
+          <End Role="RabotilniciPrezenteri" Type="ZplrmDbModel.RabotilniciPrezenteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rabotilnici">
+              <PropertyRef Name="RabotilnicaId" />
+            </Principal>
+            <Dependent Role="RabotilniciPrezenteri">
+              <PropertyRef Name="RabotilnicaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ZplrmDbModelStoreContainer" CdmEntityContainer="ZplrmDbEntities">
+          <EntitySetMapping Name="Doktori">
+            <EntityTypeMapping TypeName="ZplrmDbModel.Doktori">
+              <MappingFragment StoreEntitySet="Doktori">
+                <ScalarProperty Name="DoktorFaksimil" ColumnName="DoktorFaksimil" />
+                <ScalarProperty Name="DoktorImePrezime" ColumnName="DoktorImePrezime" />
+                <ScalarProperty Name="GradId" ColumnName="GradId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="FixedPhone" ColumnName="FixedPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gradovi">
+            <EntityTypeMapping TypeName="ZplrmDbModel.Gradovi">
+              <MappingFragment StoreEntitySet="Gradovi">
+                <ScalarProperty Name="GradId" ColumnName="GradId" />
+                <ScalarProperty Name="GradIme" ColumnName="GradIme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prezenteri">
+            <EntityTypeMapping TypeName="ZplrmDbModel.Prezenteri">
+              <MappingFragment StoreEntitySet="Prezenteri">
+                <ScalarProperty Name="PrezenterFaksimil" ColumnName="PrezenterFaksimil" />
+                <ScalarProperty Name="PrezenterImePrezime" ColumnName="PrezenterImePrezime" />
+                <ScalarProperty Name="GradId" ColumnName="GradId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="FixedPhone" ColumnName="FixedPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rabotilnici">
+            <EntityTypeMapping TypeName="ZplrmDbModel.Rabotilnici">
+              <MappingFragment StoreEntitySet="Rabotilnici">
+                <ScalarProperty Name="RabotilnicaId" ColumnName="RabotilnicaId" />
+                <ScalarProperty Name="TemaId" ColumnName="TemaId" />
+                <ScalarProperty Name="GradId" ColumnName="GradId" />
+                <ScalarProperty Name="Mesto" ColumnName="Mesto" />
+                <ScalarProperty Name="Lokacija" ColumnName="Lokacija" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Pocetok" ColumnName="Pocetok" />
+                <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+                <ScalarProperty Name="Bodovi" ColumnName="Bodovi" />
+                <ScalarProperty Name="OptimumPosetiteli" ColumnName="OptimumPosetiteli" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RabotilniciDoktori">
+            <EntityTypeMapping TypeName="ZplrmDbModel.RabotilniciDoktori">
+              <MappingFragment StoreEntitySet="RabotilniciDoktori">
+                <ScalarProperty Name="RabotilnicaDoktorId" ColumnName="RabotilnicaDoktorId" />
+                <ScalarProperty Name="RabotilnicaId" ColumnName="RabotilnicaId" />
+                <ScalarProperty Name="DoktorFaksimil" ColumnName="DoktorFaksimil" />
+                <ScalarProperty Name="UplataIznos" ColumnName="UplataIznos" />
+                <ScalarProperty Name="UplataDatum" ColumnName="UplataDatum" />
+                <ScalarProperty Name="VremePrijava" ColumnName="VremePrijava" />
+                <ScalarProperty Name="Prisuten" ColumnName="Prisuten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RabotilniciPrezenteri">
+            <EntityTypeMapping TypeName="ZplrmDbModel.RabotilniciPrezenteri">
+              <MappingFragment StoreEntitySet="RabotilniciPrezenteri">
+                <ScalarProperty Name="RabotilnicaPrezenterId" ColumnName="RabotilnicaPrezenterId" />
+                <ScalarProperty Name="RabotilnicaId" ColumnName="RabotilnicaId" />
+                <ScalarProperty Name="PrezenterFaksimil" ColumnName="PrezenterFaksimil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temi">
+            <EntityTypeMapping TypeName="ZplrmDbModel.Temi">
+              <MappingFragment StoreEntitySet="Temi">
+                <ScalarProperty Name="TemaId" ColumnName="TemaId" />
+                <ScalarProperty Name="TemaIme" ColumnName="TemaIme" />
+                <ScalarProperty Name="TemaOpis" ColumnName="TemaOpis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

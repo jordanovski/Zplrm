@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - ЗПЛРМ</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        
+        <style>
+            body { padding-top: 65px; /* 60px to make the container go all the way to the bottom of the topbar */ }
+            .aligntobottom { bottom:0; position:absolute; }
+        </style>
+        @Scripts.Render("~/bundles/modernizr")
+        @Styles.Render("~/Content/Bootstrap")
+ 
+        
+    	<!--This bundle was moved by the Kendo UI VS Extensions for compatibility reasons-->
+	    @Scripts.Render("~/bundles/jquery")   
+	
+        <!--This CSS entry was added by the Kendo UI VS Extensions for compatibility reasons-->
+	   @* <link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+	    <link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+	    <link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+	    <link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.uniform.min.css")" rel="stylesheet" type="text/css" />
+	    <link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.dataviz.uniform.min.css")" rel="stylesheet" type="text/css" />
+	    <script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+	    <script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.all.min.js")"></script>
+	    <script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.aspnetmvc.min.js")"></script>
+	    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>*@
+</head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="@Url.Action("Index", "Home")">ЗПЛРМ</a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Доктори", "Index", "Doktori")</li>
+                                <li>@Html.ActionLink("Работилници", "Index", "Rabotilnici")</li>
+                                <li>@Html.ActionLink("Теми", "Index", "Temi")</li>
+                                <li>@Html.ActionLink("Градови", "Index", "Gradovi")</li>
+                                <li>@Html.ActionLink("Презентери", "Index", "Prezenteri")</li>
+                                <li>@Html.ActionLink("Работилници доктори", "Index", "RabotilniciDoktori")</li>
+                            }
+                        </ul>
+                    </div>
+                    
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            @if(IsSectionDefined("featured")){
+                <div class="hero-unit">
+                    @RenderSection("featured", required: false)
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+        
+        @Scripts.Render("~/Scripts/Bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

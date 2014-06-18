@@ -1,0 +1,23 @@
+﻿<style type="text/css">
+    .link {
+        color:#ffffff;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+<div class="nav-collapse">
+    @if (Request.IsAuthenticated) {
+        <ul class="nav pull-right">
+            <li>
+                @Html.ActionLink(string.Format("Здраво, {0}",User.Identity.Name), "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username link", title = "Manage" })
+            </li>
+            <li>
+                @Html.ActionLink("Одјави се", "LogOff", "Account" )
+            </li>
+        </ul>
+   
+    } else {
+        <ul class="nav pull-right">
+            <li>@Html.ActionLink("Најави се", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }
+</div>

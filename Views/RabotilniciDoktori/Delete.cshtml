@@ -1,0 +1,80 @@
+﻿@model ZplrmApp.Models.RabotilniciDoktori
+
+@{
+    ViewBag.Title = "Работилници доктори";
+}
+<style type="text/css">
+    .form-horizontal .controls {
+        margin-left: 180px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .form-horizontal .control-group {
+        margin-bottom: 5px;
+    }
+    legend + .control-group {
+        margin-top: 5px;
+        -webkit-margin-top-collapse: separate;
+    }
+</style>
+<h3 class="text-error">Дали сте сигурни дека сакате да го избришете следново?</h3>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Работилница Доктор</legend>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Тема</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Rabotilnici.Temi.TemaIme)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Датум</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Rabotilnici.Datum,"ShortDateTime")
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Од</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Rabotilnici.Pocetok,"ShortTime")
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">До</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Rabotilnici.Kraj,"ShortTime")
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Факсимил</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.DoktorFaksimil)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Име Презиме</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Doktori.DoktorImePrezime)
+            </div>
+        </div>
+    
+    </fieldset>
+</form>
+@using (Html.BeginForm()) {
+    <p>
+       <button type="submit" class="btn">Избриши</button>
+    </p>
+    <p>
+        @Html.ActionLink("Назад на листата", "BackToList")
+    </p>
+
+}

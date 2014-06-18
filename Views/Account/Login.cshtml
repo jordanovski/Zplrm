@@ -1,0 +1,56 @@
+﻿@model ZplrmApp.Models.LoginModel
+
+@{
+    ViewBag.Title = "Најави се";
+}
+
+
+<section id="loginForm" class = "form-horizontal">
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl})) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Најави се</legend>
+        
+        <div class="control-group">
+            <label class="control-label" for="UserName">Корисничко име</label>
+            <div class="controls">
+              @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="Password">Лозинка</label>
+            <div class="controls">
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+              <label class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+              </label>
+              <button type="submit" class="btn">Најави се</button>
+            </div>
+        </div>
+            
+        
+        
+    </fieldset>
+    @*<p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>*@
+}
+</section>
+
+@*<section class="social" id="socialLoginForm">
+    <h2>Use another service to log in.</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

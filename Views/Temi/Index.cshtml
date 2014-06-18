@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ZplrmApp.Models.Temi>
+
+@{
+    ViewBag.Title = "Теми";
+}
+<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.uniform.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.all.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.aspnetmvc.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+<style type="text/css">
+   .lead {
+        margin-bottom: 0px;
+    }
+</style>
+<script type="text/javascript">
+    function clearFiter() {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.filter({});
+    }
+</script>
+
+<div class="well">   
+    <p class="lead">Теми</p> 
+</div>
+
+<div class="row">
+    <div class="span2">
+        <p>@Html.ActionLink("Додади нова", "Create",null, new { @class="btn"})</p>
+    </div>
+    <div class="pull-right">
+        <p><button class="btn" onclick="clearFiter()">Ресетирај филтер</button></p>
+    </div>
+</div>
+
+@(Html.Kendo().Grid(Model)    
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.TemaIme).Title("Тема");
+        columns.Bound(p => p.TemaOpis).Title("Опис");
+        columns.Template(@<text>@Html.ActionLink("Промени", "Edit", new {  id = item.TemaId})</text>).Width(70);
+        columns.Template(@<text>@Html.ActionLink("Избриши", "Delete", new { id = item.TemaId })</text>).Width(70);
+    })
+    .Filterable(filterable => filterable
+        .Extra(false)
+        .Operators(operators => 
+            operators.ForString(str => str.Clear()
+                .StartsWith("Почнува со")
+                .IsEqualTo("Е еднакво на")
+                .IsNotEqualTo("Е различно од")
+                .Contains("Содржи"))             
+            )
+    ) 
+    .Pageable()
+    .Sortable()
+    .DataSource(dataSource => dataSource
+            .Server()
+            .Model(model => model.Id(p => p.TemaId))
+    )
+)

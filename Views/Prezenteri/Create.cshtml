@@ -1,0 +1,100 @@
+﻿@model ZplrmApp.Models.Prezenteri
+
+@{
+    ViewBag.Title = "Презентери";
+}
+<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.uniform.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.all.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.aspnetmvc.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+<style type="text/css">
+    .validation-summary-errors ul li {
+        color: red;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+
+    input, textarea, .uneditable-input {
+        width: 300px;
+    }
+</style>
+@using (Html.BeginForm("Create", "Prezenteri", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Нов презентер</legend>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Факсимил</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.PrezenterFaksimil)
+                @Html.ValidationMessageFor(model => model.PrezenterFaksimil)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="DoktorImePrezime">Име Презиме</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.PrezenterImePrezime)
+                @Html.ValidationMessageFor(model => model.PrezenterImePrezime)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="GradId">Град</label>
+            <div class="controls">
+                @(Html.Kendo().DropDownListFor(m => m.GradId)
+                .BindTo(ViewBag.GradId)
+                .DataValueField("Value")
+                .DataTextField("Text")
+                .OptionLabel("Одбери град")
+                .HtmlAttributes(new { style = "width:315px"}))
+                @Html.ValidationMessageFor(model => model.GradId)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Email">Е-маил</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="MobilePhone">Мобилен телефон</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.MobilePhone)
+                @Html.ValidationMessageFor(model => model.MobilePhone)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="FixedPhone">Фиксен телефон</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.FixedPhone)
+                @Html.ValidationMessageFor(model => model.FixedPhone)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Сними</button>
+            </div>
+        </div>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад на листата", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

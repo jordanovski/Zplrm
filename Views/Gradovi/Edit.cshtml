@@ -1,0 +1,38 @@
+﻿@model ZplrmApp.Models.Gradovi
+
+@{
+    ViewBag.Title = "Градови";
+}
+
+@using (Html.BeginForm("Edit", "Gradovi", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Промени град</legend>
+        
+        @Html.HiddenFor(model => model.GradId)
+
+        <div class="control-group">
+            <label class="control-label" for="TemaOpis">Име</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.GradIme)
+                @Html.ValidationMessageFor(model => model.GradIme)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Сними</button>
+            </div>
+        </div>   
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад на листата", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

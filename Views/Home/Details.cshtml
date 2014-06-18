@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Работилница";
+}
+
+<div>
+    @Html.ActionLink("Назад на листата", "Index")
+</div>
+
+<fieldset>
+    <legend>Работилница</legend>
+    <form class="form-horizontal">
+        <div class="control-group" style="margin-bottom: 0px;">
+            <label class="control-label" for="tema">Тема:</label>
+            <div class="controls">
+                <p id="tema" style="padding: 5px 0px;">@ViewBag.Tema</p>
+            </div>
+        </div>
+        <div class="control-group" style="margin-bottom: 0px;">
+            <label class="control-label" for="location">Локација:</label>
+            <div class="controls">
+                <p id="location" style="padding: 5px 0px;">@ViewBag.Lokacija</p>
+            </div>
+        </div>
+        <div class="control-group" style="margin-bottom: 0px;">
+            <label class="control-label" for="dateTime">Датум и време:</label>
+            <div class="controls">
+                <p id="dateTime" style="padding: 5px 0px;">@ViewBag.Datum <strong>@ViewBag.Vreme</strong></p>
+            </div>
+        </div>
+        <div class="control-group" style="margin-bottom: 0px;">
+            <label class="control-label" for="slobodniMesta">Слободни места:</label>
+            <div class="controls">
+                <p id="slobodniMesta" style="padding: 5px 0px;">@ViewBag.SlobodniMesta</p>
+            </div>
+        </div>
+    </form>
+</fieldset>
+
+
+
+<fieldset>
+    <legend>Пријавени доктори</legend>
+    <div class="span5">
+        <table class="table table-condensed table-bordered">
+            <tr>
+                <th></th>
+                <th>Име Презиме</th>
+            </tr>
+            @{int i = 1;}
+            @foreach (var d in @ViewBag.Doktori)
+            {
+                <tr>
+                    <td>@(i++)</td>
+                    <td>
+                        @d.DoktorImePrezime
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</fieldset>

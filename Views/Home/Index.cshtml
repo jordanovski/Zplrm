@@ -1,0 +1,66 @@
+﻿@model IPagedList<ZplrmApp.Models.Rabotilnici>
+@{
+    ViewBag.Title = "Работилници";
+}
+<style type="text/css">   
+    .pagination {
+        margin: 0px;
+    }
+    .lead {
+        margin-bottom: 0px;
+    }
+    table {
+    font-size:12px;
+    }
+</style>
+
+<div class="well">   
+    <p class="lead">Работилници</p> 
+</div>
+
+<div class="pagedlist">
+    @Html.PagedListPager(Model,page=>Url.Action("Index", new{ page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+</div>
+
+<table class="table table-condensed table-bordered">
+    <tr>
+        <th>Тема</th>
+        <th>Локација</th>
+        <th>Датум и време</th>
+        <th>Сл. места</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model) {
+        <tr >
+            <td>
+                @Html.DisplayFor(modelItem => item.Temi.TemaIme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gradovi.GradIme), @Html.DisplayFor(modelItem => item.Mesto), @Html.DisplayFor(modelItem => item.Lokacija)
+            </td>
+            <td>
+                <p >
+                @Html.DisplayFor(modelItem => item.Datum,"ShortDateTime") &nbsp;
+                <strong> 
+                    @Html.DisplayFor(modelItem => item.Pocetok, "ShortTime") - @Html.DisplayFor(modelItem => item.Kraj, "ShortTime") 
+                </strong>
+                </p>
+            </td>
+            <td>
+                <p class="centered-cell">
+                    @Html.DisplayFor(modelItem => item.OptimumPosetiteli)
+                </p>
+            </td>
+            <td>
+                @if (item.OptimumPosetiteli > 0 || item.OptimumPosetiteli==null)
+                {
+                    @Html.ActionLink("Пријави се", "Prijavuvaje", new {  id=item.RabotilnicaId  }) 
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Детали", "Details", new {  id=item.RabotilnicaId  })
+            </td>
+        </tr>
+    }
+</table>

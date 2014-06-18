@@ -1,0 +1,36 @@
+﻿@model ZplrmApp.Models.Temi
+
+@{
+    ViewBag.Title = "Теми";
+}
+
+<h3>Дали сте сигурни дека сакате да го избришете следново?</h3>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Тема</legend>
+
+        <div class="control-group">
+            <label class="control-label" for="TemaIme">Име</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.TemaIme)                
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="TemaOpis">Опис</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.TemaOpis)
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+@using (Html.BeginForm()) {
+    <p>
+        <button type="submit" class="btn">Избриши</button>
+    </p>
+    <p>
+         @Html.ActionLink("Назад на листата", "Index")
+    </p>
+}

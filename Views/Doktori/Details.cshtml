@@ -1,0 +1,121 @@
+﻿@model ZplrmApp.Models.Doktori
+
+@{
+    ViewBag.Title = "Доктори";
+}
+<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.uniform.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.all.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.aspnetmvc.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+<style type="text/css">
+    .form-horizontal .controls {
+        margin-left: 180px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .form-horizontal .control-group {
+        margin-bottom: 5px;
+    }
+    legend + .control-group {
+        margin-top: 5px;
+        -webkit-margin-top-collapse: separate;
+    }
+</style>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Доктор</legend>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Факсимил</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.DoktorFaksimil)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="DoktorImePrezime">Име Презиме</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.DoktorImePrezime)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="GradId">Град</label>
+            <div class="controls">
+                 @Html.DisplayFor(model => model.Gradovi.GradIme)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Email">Е-маил</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="MobilePhone">Мобилен телефон</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.MobilePhone)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="FixedPhone">Фиксен телефон</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.FixedPhone)
+            </div>
+        </div>
+    </fieldset>
+</form>
+<p>
+    @Html.ActionLink("Промени", "Edit", new {  faksimil=Model.DoktorFaksimil }) |
+    @Html.ActionLink("Назад на листата", "Index")
+</p>
+
+<br />
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Актуелни работилници</legend>
+        @(Html.Kendo().Grid((IEnumerable<ZplrmApp.Models.RabotilniciDoktoriViewModel>)ViewData["RabotilniciAktuelni"])
+            .Name("Grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.RabotilnicaTema).Title("Тема");
+                columns.Bound(p => p.RabotilnicaDatum).Format("{0:dd/MM/yyyy}").Width(100).Title("Датум");
+                columns.Bound(p => p.RabotilnicaOdDo).Width(120).Title("Од До").Filterable(false);
+                columns.Bound(p => p.DoktorFaksimil).Width(100).Title("Факсимил");
+                columns.Bound(p => p.DoktorImePrezime).Title("Име презиме");
+                columns.Template(@<text>
+                    @Html.ActionLink("Избриши", "Delete", "RabotilniciDoktori", new {  id=item.RabotilnicaDoktorId  },null)
+                </text>);
+            })
+        )
+    </fieldset>
+</form>
+
+<br />
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Поминати работилници</legend>
+        @(Html.Kendo().Grid((IEnumerable<ZplrmApp.Models.RabotilniciDoktoriViewModel>)ViewData["RabotilniciPominati"])
+            .Name("Grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.RabotilnicaTema).Title("Тема");
+                columns.Bound(p => p.RabotilnicaDatum).Format("{0:MM/dd/yyyy}").Width(100).Title("Датум");
+                columns.Bound(p => p.RabotilnicaOdDo).Width(120).Title("Од До").Filterable(false);
+                columns.Bound(p => p.DoktorFaksimil).Width(100).Title("Факсимил");
+                columns.Bound(p => p.DoktorImePrezime).Title("Име презиме");
+                columns.Template(@<text>
+                    @Html.ActionLink("Избриши", "Delete","RabotilniciDoktori", new {  id=item.RabotilnicaDoktorId  })
+                </text>);
+            })
+        )</fieldset>
+</form>

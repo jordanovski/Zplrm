@@ -1,0 +1,136 @@
+﻿@model IEnumerable<ZplrmApp.Models.RabotilniciDoktoriViewModel>
+
+@{
+    ViewBag.Title = "Работилници доктори";
+}
+<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.uniform.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.all.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.aspnetmvc.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+<style type="text/css">
+    .lead {
+        margin-bottom: 0px;
+    }
+</style>
+
+<div class="well">   
+    <p class="lead">Работилници доктори</p> 
+</div>
+
+@(Html.Kendo().Grid(Model)    
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.RabotilnicaTema).Title("Тема");
+        columns.Bound(p => p.RabotilnicaDatum).Format("{0:dd/MM/yyyy}").Width(100).Title("Датум");
+        columns.Bound(p => p.RabotilnicaOdDo).Width(120).Title("Од До").Filterable(false);
+        columns.Bound(p => p.DoktorFaksimil).Width(100).Title("Факсимил");
+        columns.Bound(p => p.DoktorImePrezime).Title("Име презиме");
+        columns.Template(@<text>@Html.ActionLink("Избриши", "Delete", new {  id=item.RabotilnicaDoktorId  })</text>).Width(70);
+    })
+    .Filterable(filterable => filterable
+        .Extra(false)
+        .Operators(operators => 
+            operators.ForString(str => str.Clear()
+                .StartsWith("Почнува со")
+                .IsEqualTo("Е еднакво на")
+                .IsNotEqualTo("Е различно од")
+                .Contains("Содржи"))            
+            )
+        .Operators(operators => 
+            operators.ForDate(str => str.Clear()
+                .IsEqualTo("Е еднаков на")
+                .IsGreaterThan("Е поголем")
+                .IsGreaterThanOrEqualTo("Е поголем или еднаков")
+                .IsLessThan("Е помал")
+                .IsLessThanOrEqualTo("Е помал или еднаков"))
+            )
+        .Operators(operators => 
+            operators.ForNumber(str => str.Clear()
+                .IsEqualTo("Е еднаков на")
+                .IsGreaterThan("Е поголем")
+                .IsGreaterThanOrEqualTo("Е поголем или еднаков")
+                .IsLessThan("Е помал")
+                .IsLessThanOrEqualTo("Е помал или еднаков"))
+            )
+        ) 
+    .Pageable()
+    .Sortable()
+    .DataSource(dataSource => dataSource
+            .Server()
+            .Model(model => model.Id(p => p.RabotilnicaDoktorId))
+            
+            )
+    //.DataSource(dataSource => dataSource
+    //    .Ajax()
+    //    .Read(read => read.Action("Products_Read", "Rabotilnici"))
+    )
+
+
+
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RabotilnicaDoktorId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rabotilnici.Mesto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doktori.DoktorImePrezime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UplataIznos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UplataDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VremePrijava)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prisuten)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RabotilnicaDoktorId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rabotilnici.Mesto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doktori.DoktorImePrezime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UplataIznos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UplataDatum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VremePrijava)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prisuten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>*@

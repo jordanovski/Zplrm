@@ -1,0 +1,36 @@
+﻿@model ZplrmApp.Models.Temi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Temi</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TemaId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TemaId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TemaIme)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TemaIme)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TemaOpis)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TemaOpis)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

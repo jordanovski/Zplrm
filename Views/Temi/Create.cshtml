@@ -1,0 +1,44 @@
+﻿@model ZplrmApp.Models.Temi
+
+@{
+    ViewBag.Title = "Теми";
+}
+
+@using (Html.BeginForm("Create", "Temi", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Нова тема</legend>
+
+        <div class="control-group">
+            <label class="control-label" for="TemaIme">Име</label>
+            <div class="controls">
+                @Html.TextAreaFor(model => model.TemaIme)
+                @Html.ValidationMessageFor(model => model.TemaIme)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="TemaOpis">Опис</label>
+            <div class="controls">
+                @Html.TextAreaFor(model => model.TemaOpis)
+                @Html.ValidationMessageFor(model => model.TemaOpis)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Сними</button>
+            </div>
+        </div>       
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад на листата", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

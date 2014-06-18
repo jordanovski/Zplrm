@@ -1,0 +1,80 @@
+﻿@model ZplrmApp.Models.Prezenteri
+
+@{
+    ViewBag.Title = "Презентери";
+}
+
+<style type="text/css">
+    .form-horizontal .controls {
+        margin-left: 180px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    .form-horizontal .control-group {
+        margin-bottom: 5px;
+    }
+    legend + .control-group {
+        margin-top: 5px;
+        -webkit-margin-top-collapse: separate;
+    }
+</style>
+
+<h3 class="text-error">Дали сте сигурни дека сакате да го избришете следново?</h3>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Презентер</legend>
+
+        <div class="control-group">
+            <label class="control-label" for="DoktorFaksimil">Факсимил</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.PrezenterFaksimil)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="DoktorImePrezime">Име Презиме</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.PrezenterImePrezime)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="GradId">Град</label>
+            <div class="controls">
+                 @Html.DisplayFor(model => model.Gradovi.GradIme)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Email">Е-маил</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="MobilePhone">Мобилен телефон</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.MobilePhone)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="FixedPhone">Фиксен телефон</label>
+            <div class="controls">
+                @Html.DisplayFor(model => model.FixedPhone)
+            </div>
+        </div>
+    </fieldset>
+</form>
+@using (Html.BeginForm()) {
+    <p>
+        <button type="submit" class="btn">Избриши</button>
+    </p>
+    <p>
+        @Html.ActionLink("Назад на листата", "Index")
+    </p>
+}

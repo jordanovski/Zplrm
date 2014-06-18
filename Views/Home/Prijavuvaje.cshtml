@@ -1,0 +1,134 @@
+﻿@using System.Web.Mvc.Html;
+@model ZplrmApp.Models.RabotilniciDoktori
+@{
+    ViewBag.Title = "Пријавување";
+}
+
+@using (Html.BeginForm("Prijavuvaje", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <fieldset>
+        <legend>Пријавување</legend>
+        @Html.ValidationSummary(true)
+
+        <div class="row">
+            <div class="span7">
+                @if (@ViewBag.Uspesno)
+                {
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Успешно се регистривавте.
+                    </div>
+                }
+                @if (@ViewBag.FaksimilNePostoi)
+                {
+                    <div class="alert alert-error">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Доктор со овој факсимил не постои во базата.
+                    </div>
+                }
+                @if (@ViewBag.VekeRegistriran)
+                {
+                    <div class="alert alert-info">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Веќе сте пријавени за оваа работилница.
+                    </div>
+                }
+                 @if (@ViewBag.NemaSlobodniMesta)
+                {
+                    <div class="alert alert-error">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        Доктор со овој факсимил не постои во базата.
+                    </div>
+                }
+                <div class="control-group">
+                    <label class="control-label" for="DoktorFaksimil">Факсимил</label>
+                    <div class="controls">
+                        @Html.EditorFor(model => model.DoktorFaksimil)
+                        @Html.ValidationMessageFor(model => model.DoktorFaksimil)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">Пријави се</button>
+                    </div>
+                </div>
+                <div>
+                    @Html.ActionLink("Назад на листата", "Index")
+                </div>
+            </div>
+            <div class="span5">
+                <div class="alert alert-success">
+                    Доколку вашиот факсимил не се наоѓа во оваа листа може да се регистрираре @Html.ActionLink("овде", "SoFaksimil").
+                </div>
+                <div class="alert alert-success">
+                    Доколку немате факсимил можете да се регистрирате @Html.ActionLink("овде", "BezFaksimil").
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+}
+
+
+<br />
+<br />
+
+<div class="row">
+    <div class="span7">
+        <fieldset>
+            <legend>Работилница</legend>
+            <form class="form-horizontal">
+                <div class="control-group" style="margin-bottom: 0px;">
+                    <label class="control-label" for="tema">Тема:</label>
+                    <div class="controls">
+                        <p id="tema" style="padding: 5px 0px;">@ViewBag.Tema</p>
+                    </div>
+                </div>
+                <div class="control-group" style="margin-bottom: 0px;">
+                    <label class="control-label" for="location">Локација:</label>
+                    <div class="controls">
+                        <p id="location" style="padding: 5px 0px;">@ViewBag.Lokacija</p>
+                    </div>
+                </div>
+                <div class="control-group" style="margin-bottom: 0px;">
+                    <label class="control-label" for="dateTime">Датум и време:</label>
+                    <div class="controls">
+                        <p id="dateTime" style="padding: 5px 0px;">@ViewBag.Datum <strong>@ViewBag.Vreme</strong></p>
+                    </div>
+                </div>
+                <div class="control-group" style="margin-bottom: 0px;">
+                    <label class="control-label" for="slobodniMesta">Слободни места:</label>
+                    <div class="controls">
+                        <p id="slobodniMesta" style="padding: 5px 0px;">@ViewBag.SlobodniMesta</p>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+
+    <div class="span5">
+        <fieldset>
+            <legend>Пријавени доктори</legend>
+            <div class="span5">
+                <table class="table table-condensed table-bordered">
+                    <tr>
+                        <th></th>
+                        <th>Име Презиме</th>
+                    </tr>
+                    @{int i = 1;}
+                    @foreach (var d in @ViewBag.Doktori)
+                    {
+                        <tr>
+                            <td>@(i++)</td>
+                            <td>
+                                @d.DoktorImePrezime
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+

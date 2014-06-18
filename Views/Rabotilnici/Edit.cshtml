@@ -1,0 +1,130 @@
+﻿@model ZplrmApp.Models.Rabotilnici
+
+@{
+    ViewBag.Title = "Работилници";
+}
+<link href="@Url.Content("~/Content/kendo.compatibility.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/kendo/2012.3.1315/kendo.uniform.min.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/jquery.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.all.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo/2012.3.1315/kendo.aspnetmvc.min.js")"></script>
+<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+<style type="text/css">
+    .validation-summary-errors ul li {
+        color: red;
+    }
+
+    .field-validation-error {
+        color: red;
+    }
+
+    input, textarea, .uneditable-input {
+        width: 365px;
+    }
+</style>
+@using (Html.BeginForm("Edit", "Rabotilnici", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Промени работилница</legend>
+         @Html.HiddenFor(model => model.RabotilnicaId)
+
+        <div class="control-group">
+            <label class="control-label" for="TemaId">Тема</label>
+            <div class="controls">
+                @(Html.Kendo().DropDownListFor(m => m.TemaId)
+                .BindTo(ViewBag.TemaId)
+                .DataValueField("Value")
+                .DataTextField("Text")
+                .OptionLabel("Одбери тема")
+                .HtmlAttributes(new { style = "width:380px"}))
+                @Html.ValidationMessageFor(model => model.TemaId)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="GradId">Град</label>
+            <div class="controls">
+                @(Html.Kendo().DropDownListFor(m => m.GradId)
+                .BindTo(ViewBag.GradId)
+                .DataValueField("Value")
+                .DataTextField("Text")
+                .OptionLabel("Одбери град")
+                .HtmlAttributes(new { style = "width:380px"}))
+                @Html.ValidationMessageFor(model => model.GradId)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Mesto">Место</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Mesto)
+                @Html.ValidationMessageFor(model => model.Mesto)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Lokacija">Локација</label>
+            <div class="controls">
+                @Html.EditorFor(model => model.Lokacija)
+            @Html.ValidationMessageFor(model => model.Lokacija)
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="Datum">Датум</label>
+            <div class="controls">
+                @(Html.Kendo().DatePickerFor(model => model.Datum).Name("Datum"))
+                @Html.ValidationMessageFor(model => model.Datum)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Pocetok">Почеток</label>
+            <div class="controls">
+                @(Html.Kendo().TimePickerFor(model => model.Pocetok).Format("h:mm").Name("Pocetok"))
+            @Html.ValidationMessageFor(model => model.Pocetok)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Kraj">Крај</label>
+            <div class="controls">
+                @(Html.Kendo().TimePickerFor(model => model.Kraj).Format("h:mm").Name("Kraj"))
+                @Html.ValidationMessageFor(model => model.Kraj)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="Bodovi">Бодови</label>
+            <div class="controls">
+                @(Html.Kendo().NumericTextBoxFor(model => model.Bodovi).Format("n0").Name("Bodovi"))
+                @Html.ValidationMessageFor(model => model.Bodovi)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="OptimumPosetiteli">Оптимум посетители</label>
+            <div class="controls">
+                @(Html.Kendo().NumericTextBoxFor(model => model.OptimumPosetiteli).Format("n0").Name("OptimumPosetiteli"))
+            @Html.ValidationMessageFor(model => model.OptimumPosetiteli)
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Сними</button>
+            </div>
+        </div>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад на листата", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

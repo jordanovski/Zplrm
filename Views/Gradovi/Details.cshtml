@@ -1,0 +1,29 @@
+﻿@model ZplrmApp.Models.Gradovi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Gradovi</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GradId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GradId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GradIme)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GradIme)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
